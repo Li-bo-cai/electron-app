@@ -1,0 +1,54 @@
+{
+  "name": "oa",
+  "version": "1.1.0",
+  "icon": "./src/icon/favicon.png",
+  "description": "这是我的oa桌面应用",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "chcp 65001 && nodemon --watch index.js --exec electron .",
+    "make": "electron-forge make",
+    "start": "chcp 65001 && electron-forge start",
+    "package": "electron-forge package"
+  },
+  "author": "李",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.23.0",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.61",
+    "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.61",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
+    "@electron-forge/maker-zip": "^6.0.0-beta.61",
+    "electron": "15.2.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "oa"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
