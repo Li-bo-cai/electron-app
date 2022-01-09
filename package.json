@@ -4,6 +4,17 @@
   "icon": "./src/icon/favicon.png",
   "description": "这是我的oa桌面应用",
   "main": "./src/index.js",
+  "build": {
+    "win": {
+      "icon": "./src/icon/favicon.png",
+      "artifactName": "${productName}-windows-${version}.${ext}",
+      "target": [
+        {
+          "target": "nsis"
+        }
+      ]
+    }
+  },
   "scripts": {
     "test": "chcp 65001 && nodemon --watch index.js --exec electron .",
     "make": "electron-forge make",
@@ -22,7 +33,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
-    "electron": "15.2.0"
+    "electron": "^16.0.6"
   },
   "config": {
     "forge": {
