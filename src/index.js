@@ -2,13 +2,13 @@ const { app, BrowserWindow, Tray, dialog, Menu, nativeImage, MenuItem, screen, s
 const path = require('path')
 const axios = require('axios')
 const update = require('./update')
-const pathIcon = path.join(__dirname, './icon/favicon.png')
+const pathIcon = path.join(__dirname, './icon/OA.ico')
 const electron = require('electron')
-const IndexUrl = 'https://oa.413club.cn/front/#/information/verse-information/all-verse'
+const IndexUrl = 'https://oa.yuwan.cn/front/#/information/index'
 
 var tray, mySelf = {
-    width: 800,
-    height: 600,
+    width: 870,
+    height: 540,
 }
 
 function openWindow(url) {
@@ -118,56 +118,57 @@ function createWindow(url) {
     // 窗口中间打开
     win.center()
     // 打开开发者工具
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 }
 
 
 // 创建窗口
 app.whenReady().then(() => {
-    const userWindow = { width, height } = screen.getPrimaryDisplay().workAreaSize
-    if (userWindow.width < 1920) {
-        ipcRenderer.sendSync('sendSize', 123)
-        mySelf = {
-            width: userWindow.width,
-            height: userWindow.height
-        }
-        createWindow(IndexUrl)
-    } else {
-        axios.post('https://oa.413club.cn/inside/window').then(res => {
-            mySelf = {
-                width: res.data.data.width,
-                height: res.data.data.height,
-            }
-            createWindow(IndexUrl)
-        })
-    }
+    // const userWindow = { width, height } = screen.getPrimaryDisplay().workAreaSize
+    // if (userWindow.width < 1920) {
+    //     ipcRenderer.sendSync('sendSize', 123)
+    //     mySelf = {
+    //         width: userWindow.width,
+    //         height: userWindow.height
+    //     }
+    //     createWindow(IndexUrl)
+    // } else {
+    //     axios.post('https://oa-dev.413club.cn/inside/window').then(res => {
+    //         mySelf = {
+    //             width: res.data.data.width | 1920,
+    //             height: res.data.data.height | 1080,
+    //         }
+    //         createWindow(IndexUrl)
+    //     })
+    // }
+    createWindow(IndexUrl)
 })
 
-app.on('browser-window-created', () => {
-    setTimeout(() => {
-        // 获取线上版本进行对比
-        console.log(app.getVersion());
-        axios.post('https://oa.413club.cn/inside/version').then(res => {
-            console.log(res.data.data.httpPath);
-            if (app.getVersion() == res.data.data.version) {
-            } else {
-                const dialogOpts = {
-                    typeof: 'info',
-                    buttons: ['立即更新', '稍后更新'],
-                    title: '更新提醒',
-                    cancelId: 0,
-                    message: '您有新的更新！',
-                    detail: `内容如下：V${res.data.data.version}`
-                }
-                dialog.showMessageBox(dialogOpts).then((index) => {
-                    if (index.response === 0) {
-                        update(res.data.data.httpPath)
-                    }
-                })
-            }
-        })
-    }, 5000)
-})
+// app.on('browser-window-created', () => {
+//     setTimeout(() => {
+//         // 获取线上版本进行对比
+//         console.log(app.getVersion());
+//         axios.post('https://oa-dev.413club.cn/inside/version').then(res => {
+//             console.log(res.data.data.httpPath);
+//             if (app.getVersion() == res.data.data.version) {
+//             } else {
+//                 const dialogOpts = {
+//                     typeof: 'info',
+//                     buttons: ['立即更新', '稍后更新'],
+//                     title: '更新提醒',
+//                     cancelId: 0,
+//                     message: '您有新的更新！',
+//                     detail: `内容如下：V${res.data.data.version}`
+//                 }
+//                 dialog.showMessageBox(dialogOpts).then((index) => {
+//                     if (index.response === 0) {
+//                         update(res.data.data.httpPath)
+//                     }
+//                 })
+//             }
+//         })
+//     }, 5000)
+// })
 
 
 

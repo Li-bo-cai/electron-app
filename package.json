@@ -31,7 +31,10 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "oa"
+            "name": "oa",
+            "setupExe": "my_oa.exe",
+            "setupIcon": "./src/icon/OA.ico",
+            "noMsi": true
           }
         },
         {
