@@ -13,12 +13,13 @@
   "author": "李",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.23.0",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "axios": "^0.23.0"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
     "@electron-forge/maker-deb": "^6.0.0-beta.61",
+    "@electron-forge/maker-dmg": "^6.0.0-beta.61",
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
@@ -26,7 +27,10 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "name": "oa",
+        "icon": "./src/icon/OA.ico"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",
@@ -39,6 +43,12 @@
         },
         {
           "name": "@electron-forge/maker-zip",
+          "config": {
+            "name": "oa",
+            "setupExe": "my_oa.exe",
+            "setupIcon": "./src/icon/OA.ico",
+            "noMsi": true
+          },
           "platforms": [
             "darwin"
           ]
@@ -50,6 +60,13 @@
         {
           "name": "@electron-forge/maker-rpm",
           "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-dmg",
+          "config": {
+            "background": "./src/icon/favicon.png",
+            "format": "ULFO"
+          }
         }
       ]
     }
